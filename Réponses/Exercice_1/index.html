@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <section id="app"></section>
+
+    <script>
+      /**
+       * Exercice 1
+       * Créer une liste de livres
+       * Chaque livre doit avoir un titre, un auteur et un nombre de pages
+       * Sans toucher au HTML
+       * */
+      const books = [
+        {
+          title: "Le Petit Prince",
+          author: "Antoine de Saint-Exupéry",
+          pages: 336,
+        },
+        {
+          title: "Harry Potter",
+          author: "J.K. Rowling",
+          pages: 544,
+        },
+        {
+          title: "Le Seigneur des Anneaux",
+          author: "J.R.R. Tolkien",
+          pages: 352,
+        },
+      ];
+
+      const appElement = document.getElementById("app");
+      appElement.appendChild(createBookList(books));
+
+      /**
+       * Créer une fonction qui crée une liste de livres
+       * Elle prend en paramètre un tableau de livres
+       * Elle doit retourner un élément DOM
+       * */
+      function createBookList(dataArray) {
+        const el = document.createElement("ul");
+        el.classList.add("book-list");
+        el.append(...dataArray.map(createBookListItem));
+        return el;
+      }
+
+      /**
+       * Créer une fonction qui crée un élément li pour chaque livre
+       * Elle prend en paramètre un livre
+       * Elle doit retourner un élément DOM
+       * */
+      function createBookListItem(data) {
+        const el = document.createElement("li");
+        el.classList.add("book-list-item");
+        el.appendChild(
+          document.createTextNode(
+            `${data.title} - ${data.author} - ${data.pages} pages`
+          )
+        );
+        return el;
+      }
+    </script>
+    <style>
+      .book-list {
+        list-style: none;
+        padding: 0;
+      }
+
+      .book-list-item {
+        padding: 10px;
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+        cursor: pointer;
+      }
+    </style>
+  </body>
+</html>
