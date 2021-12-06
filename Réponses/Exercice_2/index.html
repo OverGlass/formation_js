@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercice 2</title>
+  </head>
+  <body>
+    <form id="form" onsubmit="handleSubmit(event)">
+      <label for="name">Votre nom</label>
+      <input type="text" name="name" id="name" />
+
+      <label for="age">Votre age</label>
+      <input type="number" name="age" id="age" />
+
+      <input type="submit" value="Valider" />
+    </form>
+
+    <section id="adult-content" style="display: none">
+      <h1>Bienvenue {{ name }} !</h1>
+      <p>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum
+        laboriosam minima soluta impedit quidem. Eius laboriosam delectus,
+        ratione eveniet, soluta iste dicta itaque aliquam eum quasi
+        reprehenderit dolorem, sit ipsa!
+      </p>
+    </section>
+
+    <section id="minor-content" style="display: none">
+      <h1>{{ name }}, ce contenu est reservé à un public averti</h1>
+    </section>
+
+    <script>
+      /*
+       Si l'utilisateur est majeurs afficher le contenu de la section adult-content
+       Sinon afficher le contenu de la section minor-content
+       remplacer la valeurs de name par la valeur de l'input name
+       */
+
+      function handleSubmit(event) {
+        event.preventDefault();
+        const form = event.currentTarget;
+
+        const name = form.querySelector('input[name="name"]').value;
+        const age = form.querySelector('input[name="age"]').value;
+
+        const isMajor = age >= 18;
+
+        const adultContent = document.getElementById("adult-content");
+        const minorContent = document.getElementById("minor-content");
+
+        adultContent.style.display = isMajor ? "block" : "none";
+        minorContent.style.display = isMajor ? "none" : "block";
+
+        const content = isMajor ? adultContent : minorContent;
+
+        const h1 = content.querySelector("h1");
+        h1.innerText = h1.innerText.replace("{{ name }}", name || "Anonyme");
+      }
+    </script>
+  </body>
+</html>
