@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercice 3</title>
+  </head>
+  <body>
+    <form action="" oninput="handleInputForm(event)">
+      <label for="name">Votre nom</label>
+      <input type="text" name="name" id="name" />
+
+      <label for="name">Votre prenom</label>
+      <input type="text" name="prenom" id="prenom" />
+
+      <label for="age">Votre age</label>
+      <input type="number" name="age" id="age" />
+    </form>
+
+    <article></article>
+    <script>
+      /**
+       * Exercice 3
+       * Ne pas toucher au HTML
+       * Créer un paragraphe avec le nom, le prénom de l'utilisateur et son âge dans la balise article.
+       * avec comme texte à trou : "Bonjour, je m'appelle ____ ____ et j'ai ___ ans"
+       * les remplir avec les valeurs du formulaire
+       * Le paragraphe doit se mettre à jour pendant la saisie des champs.
+       * les valeurs doivent être en gras et rouge
+       * Si un champ est vide dans le texte à trou mettre 3 underscores rouge.
+       * Le nom doit etre en majuscule
+       * Le prénom doit etre en minuscule avec une capital
+       * L'age doit etre en nombre entier
+       * Bon code ! :)
+       * */
+
+      function handleInputForm (event) {
+        const name = document.getElementById('name').value;
+        const prenom = document.getElementById('prenom').value;
+        const age = document.getElementById('age').value;
+        const article = document.querySelector('article');
+        
+        article.innerHTML = createTextaTrou(name.toUpperCase(), capitalize(prenom), age).outerHTML;
+
+        function createTextaTrou (nom, prenom, age) {
+          const textaTrou = document.createElement('p');
+          const span = (txt) => createSpan(isEmpty(txt) ? '___' : txt).outerHTML;
+          textaTrou.innerHTML = `Bonjour, je m'appelle ${span(nom)} ${span(prenom)} et j'ai ${span(age)} ans`;
+          return textaTrou;
+
+          function createSpan (text) {
+            let span = document.createElement('span');
+            span.textContent = text;
+            span.style.color = 'red';
+            span.style.fontWeight = 'bold';
+            return span;
+          }
+          function isEmpty (str) {
+            return str.length === 0;
+          }
+        }
+        function capitalize (str) {
+          return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+        }
+    }
+
+    </script>
+  </body>
+</html>
