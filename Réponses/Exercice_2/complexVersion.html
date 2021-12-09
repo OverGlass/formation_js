@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercice 2</title>
+  </head>
+  <body>
+    <form id="form" onsubmit="handleSubmit(event)">
+      <label for="name">Votre nom</label>
+      <input type="text" name="name" id="name" />
+
+      <label for="age">Votre age</label>
+      <input type="number" name="age" id="age" />
+
+      <input type="submit" value="Valider" />
+    </form>
+
+    <section id="adult-content" style="display: none">
+      <h1>Bienvenue {{ name }} !</h1>
+      <p>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum
+        laboriosam minima soluta impedit quidem. Eius laboriosam delectus,
+        ratione eveniet, soluta iste dicta itaque aliquam eum quasi
+        reprehenderit dolorem, sit ipsa!
+      </p>
+    </section>
+
+    <section id="minor-content" style="display: none">
+      <h1>{{ name }}, ce contenu est reservé à un public averti</h1>
+    </section>
+
+    <script>
+      /*
+       Si l'utilisateur est majeurs afficher le contenu de la section adult-content
+       Sinon afficher le contenu de la section minor-content
+       remplacer la valeurs de name par la valeur de l'input name
+       */
+      const texts = {};
+      function handleSubmit(event) {
+        const nameValue = document.querySelector("#name").value;
+        const isMajor = document.querySelector("#age").value >= 18;
+        const contentID = isMajor ? "adult-content" : "minor-content";
+        const contentElement = document.querySelector(`#${contentID}`);
+        const h1Element = content.querySelector("h1");
+
+        // Cache les contenus
+        document.querySelectorAll("#adult-content, #minor-content")
+          .forEach(el => (el.style.display = "none"));
+
+        // Sauvegarde les textes avec {{name}}
+        if (!texts[contentID]) texts[contentID] = h1.innerText;
+
+        // remplace les textes
+        h1.innerText = texts[contentID].replace("{{ name }}", name || "Anonyme");
+
+        // Affiche le contenu
+        content.style.display = "block";
+
+        // Empêche le rechargement de la page
+        event.preventDefault();
+      }
+    </script>
+  </body>
+</html>
