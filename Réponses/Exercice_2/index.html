@@ -37,26 +37,29 @@
        Sinon afficher le contenu de la section minor-content
        remplacer la valeurs de name par la valeur de l'input name
        */
-
+      const texts = {};
       function handleSubmit(event) {
+        const inputNameValue = document.querySelector("#name").value;
+        const isMajor = document.querySelector("#age").value >= 18;
+        const contentID = isMajor ? "adult-content" : "minor-content";
+        const contentElement = document.querySelector(`#${contentID}`);
+        const h1Element = contentElement.querySelector("h1");
+
+        // Cache les contenus
+        document.querySelectorAll("#adult-content, #minor-content")
+          .forEach(el => (el.style.display = "none"));
+
+        // Sauvegarde les textes avec {{name}}
+        if (!texts[contentID]) texts[contentID] = h1Element.innerText;
+
+        // remplace le texte
+        h1Element.innerText = texts[contentID].replace("{{ name }}", inputNameValue || "Anonyme");
+
+        // Affiche le contenu
+        contentElement.style.display = "block";
+
+        // Empêche le rechargement de la page
         event.preventDefault();
-        const form = event.currentTarget;
-
-        const name = form.querySelector('input[name="name"]').value;
-        const age = form.querySelector('input[name="age"]').value;
-
-        const isMajor = age >= 18;
-
-        const adultContent = document.getElementById("adult-content");
-        const minorContent = document.getElementById("minor-content");
-
-        adultContent.style.display = isMajor ? "block" : "none";
-        minorContent.style.display = isMajor ? "none" : "block";
-
-        const content = isMajor ? adultContent : minorContent;
-
-        const h1 = content.querySelector("h1");
-        h1.innerText = h1.innerText.replace("{{ name }}", name || "Anonyme");
       }
     </script>
   </body>
