@@ -36,8 +36,10 @@
        Si l'utilisateur est majeurs afficher le contenu de la section adult-content
        Sinon afficher le contenu de la section minor-content
        remplacer la valeurs de name par la valeur de l'input name
+       Si l'input name est vide afficher "anonyme"
        */
       const texts = {};
+
       function handleSubmit(event) {
         const inputNameValue = document.querySelector("#name").value;
         const isMajor = document.querySelector("#age").value >= 18;
@@ -49,7 +51,7 @@
         document.querySelectorAll("#adult-content, #minor-content")
           .forEach(el => (el.style.display = "none"));
 
-        // Sauvegarde les textes avec {{name}}
+        // Sauvegarde le texte du h1 avec {{name}}
         if (!texts[contentID]) texts[contentID] = h1Element.innerText;
 
         // remplace le texte
