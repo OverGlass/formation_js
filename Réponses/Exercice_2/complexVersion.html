@@ -39,24 +39,24 @@
        */
       const texts = {};
       function handleSubmit(event) {
-        const nameValue = document.querySelector("#name").value;
+        const inputNameValue = document.querySelector("#name").value;
         const isMajor = document.querySelector("#age").value >= 18;
         const contentID = isMajor ? "adult-content" : "minor-content";
         const contentElement = document.querySelector(`#${contentID}`);
-        const h1Element = content.querySelector("h1");
+        const h1Element = contentElement.querySelector("h1");
 
         // Cache les contenus
         document.querySelectorAll("#adult-content, #minor-content")
           .forEach(el => (el.style.display = "none"));
 
         // Sauvegarde les textes avec {{name}}
-        if (!texts[contentID]) texts[contentID] = h1.innerText;
+        if (!texts[contentID]) texts[contentID] = h1Element.innerText;
 
-        // remplace les textes
-        h1.innerText = texts[contentID].replace("{{ name }}", name || "Anonyme");
+        // remplace le texte
+        h1Element.innerText = texts[contentID].replace("{{ name }}", inputNameValue || "Anonyme");
 
         // Affiche le contenu
-        content.style.display = "block";
+        contentElement.style.display = "block";
 
         // Empêche le rechargement de la page
         event.preventDefault();
