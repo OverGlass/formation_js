@@ -31,7 +31,6 @@
        * Si un champ est vide dans le texte à trou mettre 3 underscores rouge.
        * Le nom doit etre en majuscule
        * Le prénom doit etre en minuscule avec une capital
-       * L'age doit etre en nombre entier
        * Bon code ! :)
        * */
 
@@ -40,7 +39,7 @@
         const prenom = document.getElementById('prenom').value;
         const age = document.getElementById('age').value;
         const article = document.querySelector('article');
-        
+
         article.innerHTML = createTextaTrou(name.toUpperCase(), capitalize(prenom), age).outerHTML;
 
         function createTextaTrou (nom, prenom, age) {
